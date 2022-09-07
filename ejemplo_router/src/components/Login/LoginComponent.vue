@@ -10,9 +10,13 @@
         <br><br>
         <button type="submit">Login</button>
     </form>
+
+    <router-view></router-view>
 </template>
 <script>
+ 
 export default {
+ 
     name:'LoginComponent',
     data() {
     return {
@@ -27,12 +31,14 @@ export default {
             
             event.preventDefault()
             if (this.form.email === 'jdoe@gmail.com' && this.form.password === '12345') {
-                alert(this.form.email + ' ' + this.form.password);
-                this.$store.commit('login')
-                alert('Funciona ' + this.$store.email + ' ' + this.$store.isLoggedIn);
-            } 
-            alert('Credenciales incorrectas');
+                this.$store.dispatch('mockLogin');
+                this.$router.push(`/professor`)
+            } else {
+                alert('Credenciales incorrectas');
+            }
+           
         }
+     
     }
     
 }

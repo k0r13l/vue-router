@@ -1,4 +1,8 @@
 <template>
+  <button @click="this.$router.push('/professor')"> Professor </button> | 
+  <button @click="this.$router.push('/course')">Course</button> | 
+  <button @click="this.$router.push('/student')">Student</button> | 
+  <button @click="this.$router.push('/login')">Login</button> | 
   <router-view />
 </template>
 

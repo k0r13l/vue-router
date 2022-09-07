@@ -2,21 +2,18 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    isLoggedIn:false,
-    emailT:'t'
+    isLoggedIn: false
 
   },
   getters: {
   },
-  methods: {
-
-    login (state, email) {
+  mutations: {
+    LoggedIn(state) {
       state.isLoggedIn = true;
-      state.email = email;
+
     }
   },
   actions: {
-  },
-  modules: {
+    mockLogin(context) {  context.commit('LoggedIn')}
   }
 })

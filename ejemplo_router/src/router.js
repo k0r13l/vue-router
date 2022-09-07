@@ -15,19 +15,27 @@ import StudentComponent from './components/Student/StudentComponent.vue';
 import StudentAComponent from './components/Student/StudentAComponent.vue';
 import StudentBComponent from './components/Student/StudentBComponent.vue';
 import StudentCComponent from './components/Student/StudentCComponent.vue';
-
+import HomeComponent from './views/HomeComponent.vue';
 import LoginComponent from './components/Login/LoginComponent.vue'
+import store from './store/store';
 
 const routes = [
 	{
 		path: '/',
-		name: 'Login',
-		component: LoginComponent,
+		name: 'Home',
+		component: HomeComponent,
 		children: [
+			{ 
+				path: '/login',
+				name: 'Login',
+				component: LoginComponent,
+			},
 			{
+
 				path: '/professor',
 				name: 'Professor',
 				component: ProfessorComponent,
+				meta: { requiresAuth: true },
 				children: [
 					{
 						path: 'professor_a',
@@ -40,7 +48,7 @@ const routes = [
 						component: ProfessorBComponent,
 					},
 					{
-						path: 'professor_c',	
+						path: 'professor_c',
 						component: ProfessorCComponent,
 						name: 'professorc'
 					},
@@ -50,6 +58,7 @@ const routes = [
 				path: '/course',
 				name: 'Course',
 				component: CourseComponent,
+				meta: { requiresAuth: true },
 				children: [
 					{
 						path: 'course_a',
@@ -72,6 +81,7 @@ const routes = [
 				path: '/student',
 				name: 'Student',
 				component: StudentComponent,
+				meta: { requiresAuth: true },
 				children: [
 					{
 						path: 'student_a',
@@ -98,5 +108,19 @@ const router = createRouter({
 	history: createWebHistory(),
 	routes,
 });
+router.beforeEach((to, from, next) => {
+	if (to.matched.some(route => route.meta.requiresAuth)) {
+
+		if (!store.state.isLoggedIn) {
+			next('/login')
+		} else {
+			next();
+		}
+	} else {
+
+		next();
+	}
+
+})
 
 export default router;
