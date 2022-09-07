@@ -16,73 +16,82 @@ import StudentAComponent from './components/Student/StudentAComponent.vue';
 import StudentBComponent from './components/Student/StudentBComponent.vue';
 import StudentCComponent from './components/Student/StudentCComponent.vue';
 
+import LoginComponent from './components/Login/LoginComponent.vue'
+
 const routes = [
 	{
-		path: '/professor',
-		name: 'Professor',
-		component: ProfessorComponent,
+		path: '/',
+		name: 'Login',
+		component: LoginComponent,
 		children: [
 			{
-				path: 'professor_a',
-				name: 'professora',
-				component: ProfessorAComponent,
+				path: '/professor',
+				name: 'Professor',
+				component: ProfessorComponent,
+				children: [
+					{
+						path: 'professor_a',
+						name: 'professora',
+						component: ProfessorAComponent,
+					},
+					{
+						path: 'professor_b',
+						name: 'professorb',
+						component: ProfessorBComponent,
+					},
+					{
+						path: 'professor_c',	
+						component: ProfessorCComponent,
+						name: 'professorc'
+					},
+				]
 			},
 			{
-				path: 'professor_b',
-				name: 'professorb',
-				component: ProfessorBComponent,
+				path: '/course',
+				name: 'Course',
+				component: CourseComponent,
+				children: [
+					{
+						path: 'course_a',
+						name: 'coursea',
+						component: CourseAComponent,
+					},
+					{
+						path: 'course_b',
+						name: 'courseb',
+						component: CourseBComponent,
+					},
+					{
+						path: 'course_c',
+						name: 'coursec',
+						component: CourseCComponent,
+					},
+				]
 			},
 			{
-				path: 'professor_c',	
-				component: ProfessorCComponent,
-				name: 'professorc'
+				path: '/student',
+				name: 'Student',
+				component: StudentComponent,
+				children: [
+					{
+						path: 'student_a',
+						name: 'studenta',
+						component: StudentAComponent,
+					},
+					{
+						path: 'student_b',
+						name: 'studentb',
+						component: StudentBComponent,
+					},
+					{
+						path: 'student_c',
+						name: 'studentc',
+						component: StudentCComponent,
+					},
+				]
 			},
 		]
-	},
-    {
-		path: '/course',
-		name: 'Course',
-		component: CourseComponent,
-		children: [
-			{
-				path: 'course_a',
-				name: 'coursea',
-				component: CourseAComponent,
-			},
-			{
-				path: 'course_b',
-				name: 'courseb',
-				component: CourseBComponent,
-			},
-			{
-				path: 'course_c',
-				name: 'coursec',
-				component: CourseCComponent,
-			},
-		]
-	},
-    {
-		path: '/student',
-		name: 'Student',
-		component: StudentComponent,
-		children: [
-			{
-				path: 'student_a',
-				name: 'studenta',
-				component: StudentAComponent,
-			},
-			{
-				path: 'student_b',
-				name: 'studentb',
-				component: StudentBComponent,
-			},
-			{
-				path: 'student_c',
-				name: 'studentc',
-				component: StudentCComponent,
-			},
-		]
-	},
+	}
 ];
 
 const router = createRouter({
